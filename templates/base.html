@@ -14,29 +14,32 @@
     <meta name="description" content="探索 Python 世界，分享 django web开发、Python 数据分析、Python 网络爬虫等一切与 Python 相关的知识"/>
     <!-- favicon
     ============================================ -->
-    <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'blog/img/favicon.png' %}">
 
     <!-- Google Fonts
     ============================================ -->
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet' type='text/css'>
+    {#    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet' type='text/css'>#}
 
     <!-- Bootstrap CSS
     ============================================ -->
-    <link rel="stylesheet" href="{% static 'blog/css/bootstrap.min.css' %}">
+    {#    <link rel="stylesheet" href="{% static 'blog/css/bootstrap.min.css' %}">#}
+    <link href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <!-- font-awesome CSS
     ============================================ -->
-    <link rel="stylesheet" href="{% static 'blog/css/font-awesome.min.css' %}">
+    {#    <link rel="stylesheet" href="{% static 'blog/css/font-awesome.min.css' %}">#}
+    <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <!-- owl.carousel CSS
     ============================================ -->
-    <link rel="stylesheet" href="{% static 'blog/css/owl.carousel.css' %}">
-    <link rel="stylesheet" href="{% static 'blog/css/owl.theme.css' %}">
-    <link rel="stylesheet" href="{% static 'blog/css/owl.transitions.css' %}">
+    {#    <link rel="stylesheet" href="{% static 'blog/css/owl.carousel.css' %}">#}
+    {#    <link rel="stylesheet" href="{% static 'blog/css/owl.theme.css' %}">#}
+    {#    <link rel="stylesheet" href="{% static 'blog/css/owl.transitions.css' %}">#}
     <!-- meanmenu CSS
     ============================================ -->
     <link rel="stylesheet" href="{% static 'blog/css/meanmenu.css' %}">
     <!-- normalize CSS
     ============================================ -->
-    <link rel="stylesheet" href="{% static 'blog/css/normalize.css' %}">
+    {#    <link rel="stylesheet" href="{% static 'blog/css/normalize.css' %}">#}
+    <link href="//cdn.bootcss.com/normalize/5.0.0/normalize.min.css" rel="stylesheet">
     <!-- main CSS
     ============================================ -->
     <link rel="stylesheet" href="{% static 'blog/css/main.css' %}">
@@ -56,7 +59,8 @@
     {% endblock link %}
     {% block style %}
     {% endblock style %}
-    <script src="{% static 'blog/js/vendor/modernizr-2.8.3.min.js' %}"></script>
+    <script src="//cdn.bootcss.com/modernizr/2.8.3/modernizr.min.js"></script>
+    {#    <script src="{% static 'blog/js/vendor/modernizr-2.8.3.min.js' %}"></script>#}
 </head>
 <body class="home-2">
 <!--[if lt IE 8]>
@@ -180,10 +184,12 @@
 
 <!-- jquery
 ============================================ -->
-<script src="{% static 'blog/js/vendor/jquery-1.11.3.min.js' %}"></script>
+{#<script src="{% static 'blog/js/vendor/jquery-1.11.3.min.js' %}"></script>#}
+<script src="//cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
 <!-- bootstrap JS
 ============================================ -->
-<script src="{% static 'blog/js/bootstrap.min.js' %}"></script>
+{#<script src="{% static 'blog/js/bootstrap.min.js' %}"></script>#}
+<script src="//cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <!-- meanmenu JS
 ============================================ -->
 <script src="{% static 'blog/js/jquery.meanmenu.js' %}"></script>
@@ -192,7 +198,8 @@
 <script src="{% static 'blog/js/owl.carousel.min.js' %}"></script>
 <!-- scrollUp JS
 ============================================ -->
-<script src="{% static 'blog/js/jquery.scrollUp.min.js' %}"></script>
+{#<script src="{% static 'blog/js/jquery.scrollUp.min.js' %}"></script>#}
+<script src="//cdn.bootcss.com/scrollup/2.4.1/jquery.scrollUp.min.js"></script>
 <!-- plugins JS
 ============================================ -->
 <script src="{% static 'blog/js/plugins.js' %}"></script>

@@ -878,7 +878,7 @@ textarea:focus::-moz-placeholder{color:transparent;}
 /*  8. footer-area
 /*========================================*/
 .footer-area{
-	background:url(img/footer-bg.jpg) no-repeat scroll center center;
+	background:url(../img/footer-bg.jpg) no-repeat scroll center center;
 	background-size:cover;
 	padding:70px 0 65px;
 }
