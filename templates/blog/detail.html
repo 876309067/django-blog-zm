@@ -3,6 +3,15 @@
     <title>{{ post.title }}_{{ post.category }}_追梦人物的博客</title>
 {% endblock title %}
 {% block main %}
+    <div class="toc-button hidden-lg"><i class="fa fa-chevron-right" aria-hidden="true"></i></div>
+    <div class="side-bar">
+        <div class="toc-wrapper">
+            <h3>目录</h3>
+            <ul class="toc">
+
+            </ul>
+        </div>
+    </div>
     <!-- single-blog-area start -->
     <div class="col-md-8 col-sm-12">
         <div class="single-blog-details">
@@ -56,7 +65,50 @@
             </div><!-- /.comments-area -->
         </div><!-- /.single-blog-details -->
     </div>
-
-
     <!-- single-blog-area end -->
 {% endblock main %}
+{% block aside %}
+    <div class="col-md-4 col-md-offset-0 col-sm-8 col-sm-offset-2">
+        <div class="sidebar-area fix">
+            <div class="single-sidebar-widget">
+                <h6 class="widget-title">目录</h6>
+                <div class="sidebar-content">
+                    <div class="toc" id="toc">
+                    </div>
+                </div><!-- /.sidebar-content -->
+            </div><!-- /.single-sidebar-widget -->
+        </div><!-- /.sidebar-area -->
+    </div>
+{% endblock aside %}
+{% block script %}
+    <script>
+        $(function () {
+            var contents;
+            contents = gajus.Contents({
+                articles: $('.post-long-desc').find('h1, h2, h3').get()
+            });
+            $('.toc').append(contents.list());
+
+            $tocbutton = $('.toc-button');
+            $tocbutton.click(function () {
+                if ($tocbutton.css('left') == '0px') {
+                    $('.side-bar').animate({
+                        left: '0px'
+                    });
+                    $tocbutton.animate({
+                        left: '250'
+                    });
+                    $('.toc-button > i').removeClass('fa fa-chevron-right').addClass('fa fa-chevron-left');
+                } else {
+                    $('.side-bar').animate({
+                        left: '-250'
+                    });
+                    $tocbutton.animate({
+                        left: '0'
+                    });
+                    $('.toc-button > i').removeClass('fa fa-chevron-left').addClass('fa fa-chevron-right');
+                }
+            })
+        });
+    </script>
+{% endblock script %}

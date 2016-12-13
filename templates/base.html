@@ -203,8 +203,11 @@
 <!-- plugins JS
 ============================================ -->
 <script src="{% static 'blog/js/plugins.js' %}"></script>
+<script src="{% static 'blog/js/contents.js' %}"></script>
 <!-- main JS
 ============================================ -->
 <script src="{% static 'blog/js/main.js' %}"></script>
+{% block script %}
+{% endblock script %}
 </body>
 </html>
