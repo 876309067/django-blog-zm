@@ -2,85 +2,88 @@
 <div class="card card-block">
     {% render_comment_form for post %}
 </div>
-<div class="card card-block" id="comment-panel">
-    {% get_comment_count for post as comment_count %}
-    <h3 class="card-title">评论列表
-        <small>({{ comment_count }})</small>
-    </h3>
-    <hr>
-    {% if comment_count %}
-        <ul class="media-list">
-            {% for root_comment in post.root_comments %}
-                <li class="media" id="c{{ root_comment.pk }}">
-                    <div class="media-left">
-                        <a href="#">
-                            <img class="media-object" src="{% static 'blog/images/default_avatar.jpg' %}"
-                                 alt="Generic placeholder image"
-                                 style="width: 34px">
-                        </a>
-                    </div>
-                    <div class="media-body">
-                        <ul class="list-inline comment-meta">
-                            <li class="list-inline-item">
-                                <span class="media-heading font-weight-bold">
-                                    {{ root_comment.name }}
-                                    {% if root_comment.user.is_superuser %}
-                                        <span class="tag tag-info">博主</span>
-                                    {% endif %}
-                                </span>
-                            </li>
-                            <li class="list-inline-item">
-                                <time class="text-muted"
-                                      title="{{ root_comment.submit_date }}">{{ root_comment.submit_date |timesince }}前
-                                </time>
-                            </li>
-                            <li class="list-inline-item">
-                                <a href="{% url 'comments:reply' root_comment.pk %}">回复</a>
-                            </li>
-                        </ul>
-                        <div class="card-text">{{ root_comment.comment_html|bleach|safe }}</div>
-
-                        <!-- Nested media object -->
-                        {% for desc_comment in root_comment.get_descendants_reversely %}
-                            <div class="media" id="c{{ desc_comment.pk }}">
-                                <a class="media-left" href="#">
-                                    <img class="media-object" src="{% static 'blog/images/default_avatar.jpg' %}"
-                                         alt="Generic placeholder image"
-                                         style="width: 34px">
-                                </a>
-                                <div class="media-body">
-                                    <ul class="list-inline comment-meta">
-                                        <li class="list-inline-item">
-                                            <span class="media-heading font-weight-bold">{{ desc_comment.name }}
-                                                {% if desc_comment.user.is_superuser %}
-                                                    <span class="tag tag-info">博主</span>
-                                                {% endif %}
-                                            </span>
-                                            <i class="fa fa-share" aria-hidden="true"></i>
-                                            <span class="media-heading font-weight-bold">{{ desc_comment.parent.name }}
-                                                {% if desc_comment.parent.user.is_superuser %}
-                                                    <span class="tag tag-info">博主</span>
-                                                {% endif %}</span>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <time class="text-muted"
-                                                  title="{{ desc_comment.submit_date }}">{{ desc_comment.submit_date |timesince }}前
-                                            </time>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <a href="{% url 'comments:reply' desc_comment.pk %}">回复</a>
-                                        </li>
-                                    </ul>
-                                    <div class="card-text">{{ desc_comment.comment_html|bleach|safe }}</div>
-                                </div>
+{% get_comment_count for post as comment_count %}
+<h3 class="card-title">评论列表
+    <small>({{ comment_count }})</small>
+</h3>
+{% if comment_count %}
+    <ul class="comments-list">
+    {% for root_comment in post.root_comments %}
+        <li class="single-comment" id="c{{ root_comment.pk }}">
+            <div class="comment-box">
+                <div class="comment-author">
+                    <img src="{% static 'blog/img/default_avatar.jpg' %}" alt="Comment Author" style="width: 50px"/>
+                </div>
+                <div class="comment-info">
+                    <p class="author-name">
+                        {% if root_comment.url %}
+                            <a href="{{ root_comment.url }}" rel="nofollow">{{ root_comment.name }}
+                                {% if root_comment.user.is_superuser %}
+                                    <span class="label label-danger">博主</span>
+                                {% endif %}</a>
+                        {% else %}
+                            <span>{{ root_comment.name }}
+                                {% if root_comment.user.is_superuser %}
+                                    <span class="label label-danger">博主</span>
+                                {% endif %}</span>
+                        {% endif %}
+                    </p>
+                    <time class="comment-date"
+                          title="{{ root_comment.submit_date }}">{{ root_comment.submit_date |timesince }}前
+                    </time>
+                    <p>{{ root_comment.comment_html|bleach|safe }}</p>
+                    <a href="{% url 'comments:reply' root_comment.pk %}" class="reply-link" title="Reply">回复</a>
+                </div>
+            </div>
+            <ul class="reply">
+                {% for desc_comment in root_comment.get_descendants_reversely %}
+                    <li class="single-comment" id="c{{ desc_comment.pk }}">
+                        <div class="comment-box">
+                            <div class="comment-author">
+                                <img src="{% static 'blog/img/default_avatar.jpg' %}" alt="Comment Author"
+                                     style="width: 50px"/>
                             </div>
-                        {% endfor %}
-                    </div>
-                </li>
-                <br>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <div>暂无评论</div>
-    {% endif %}
-</div>
+                            <div class="comment-info">
+                                <p class="author-name">
+                                    {% if desc_comment.url %}
+                                        <a href="{{ desc_comment.url }}" rel="nofollow">{{ desc_comment.name }}
+                                            {% if desc_comment.user.is_superuser %}
+                                                <span class="label label-danger">博主</span>
+                                            {% endif %}</a>
+                                    {% else %}
+                                        <span>{{ desc_comment.name }}
+                                            {% if desc_comment.user.is_superuser %}
+                                                <span class="label label-danger">博主</span>
+                                            {% endif %}</span>
+                                    {% endif %}
+                                    <i class="fa fa-share" aria-hidden="true"></i>
+                                    {% if desc_comment.parent.url %}
+                                        <a href="{{ desc_comment.parent.url }}"
+                                           rel="nofollow">{{ desc_comment.parent.name }}
+                                            {% if desc_comment.parent.user.is_superuser %}
+                                                <span class="label label-danger">博主</span>
+                                            {% endif %}</a>
+                                    {% else %}
+                                        <span>{{ desc_comment.parent.name }}
+                                            {% if desc_comment.parent.user.is_superuser %}
+                                                <span class="label label-danger">博主</span>
+                                            {% endif %}</span>
+                                    {% endif %}
+                                </p>
+                                <time class="comment-date"
+                                      title="{{ desc_comment.submit_date }}">{{ desc_comment.submit_date |timesince }}前
+                                </time>
+                                <p>{{ desc_comment.comment_html|bleach|safe }}</p>
+                                <a href="{% url 'comments:reply' desc_comment.pk %}" class="reply-link"
+                                   title="Reply">回复</a>
+                            </div>
+                        </div>
+                    </li><!-- /.single-comment -->
+                {% endfor %}
+            </ul><!-- /.reply -->
+        </li><!-- /.single-comment -->
+    {% endfor %}
+{% else %}
+    暂无评论
+{% endif %}
+</ul>

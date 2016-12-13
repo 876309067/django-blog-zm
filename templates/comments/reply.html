@@ -2,30 +2,59 @@
 {% load staticfiles comments crispy_forms_tags bleach_tags %}
 {% block main %}
     <div class="col-md-8">
-        <h4 class="m-b-1 alert mark">回复<span class="font-weight-bold"> {{ mycomment.name }} </span>的评论：</h4>
-        <div class="card card-block">
-            <div class="media">
-                <div class="media-left">
-                    <a href="#">
-                        <img class="media-object" src="{% static 'blog/images/default_avatar.jpg' %}"
-                             alt="Generic placeholder image"
-                             style="width: 34px">
-                    </a>
+        <h4 class="m-b-1 alert mark">回复<span class=""> {{ mycomment.name }} </span>的评论：</h4>
+        <ul class="comments-list">
+            <li class="single-comment" id="c{{ mycomment.pk }}">
+                <div class="comment-box">
+                    <div class="comment-author">
+                        <img src="{% static 'blog/img/default_avatar.jpg' %}" alt="Comment Author" style="width: 50px"/>
+                    </div>
+                    <div class="comment-info">
+                        <p class="author-name">
+                            {% if mycomment.url %}
+                                <a href="{{ mycomment.url }}" rel="nofollow">{{ mycomment.name }}
+                                    {% if mycomment.user.is_superuser %}
+                                        <span class="label label-danger">博主</span>
+                                    {% endif %}</a>
+                            {% else %}
+                                <span>{{ mycomment.name }}
+                                {% if mycomment.user.is_superuser %}
+                                    <span class="label label-danger">博主</span>
+                                {% endif %}</span>
+                            {% endif %}
+                        </p>
+                        <time class="comment-date"
+                              title="{{ mycomment.submit_date }}">{{ mycomment.submit_date |timesince }}前
+                        </time>
+                        <p>{{ mycomment.comment_html|bleach|safe }}</p>
+                    </div>
                 </div>
-                <div class="media-body">
-                    <ul class="list-inline comment-meta">
-                        <li class="list-inline-item">
-                            <span class="media-heading font-weight-bold">{{ mycomment.name }}</span>
-                        </li>
-                        <li class="list-inline-item">
-                            <time class="text-muted">{{ mycomment.submit_date |timesince }}前</time>
-                        </li>
-                    </ul>
-                    <p class="card-text">{{ mycomment.comment_html|bleach|safe }}</p>
-                    <hr>
-                    {% crispy form %}
-                </div>
-            </div>
-        </div>
+            </li><!-- /.single-comment -->
+        </ul>
+        {% crispy form %}
+        {#        <div class="card card-block">#}
+        {#            <div class="media">#}
+        {#                <div class="media-left">#}
+        {#                    <a href="#">#}
+        {#                        <img class="media-object" src="{% static 'blog/images/default_avatar.jpg' %}"#}
+        {#                             alt="Generic placeholder image"#}
+        {#                             style="width: 34px">#}
+        {#                    </a>#}
+        {#                </div>#}
+        {#                <div class="media-body">#}
+        {#                    <ul class="list-inline comment-meta">#}
+        {#                        <li class="list-inline-item">#}
+        {#                            <span class="media-heading font-weight-bold">{{ mycomment.name }}</span>#}
+        {#                        </li>#}
+        {#                        <li class="list-inline-item">#}
+        {#                            <time class="text-muted">{{ mycomment.submit_date |timesince }}前</time>#}
+        {#                        </li>#}
+        {#                    </ul>#}
+        {#                    <p class="card-text">{{ mycomment.comment_html|bleach|safe }}</p>#}
+        {#                    <hr>#}
+        {#                    {% crispy form %}#}
+        {#                </div>#}
+        {#            </div>#}
+        {#        </div>#}
     </div>
 {% endblock main %}

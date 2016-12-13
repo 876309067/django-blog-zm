@@ -1,3 +1,9 @@
+.single-blog-details {
+    color: #000;
+    letter-spacing: 1px;
+    font: 300 1rem/1.8 PingFang SC, Lantinghei SC, Microsoft Yahei, Hiragino Sans GB, Microsoft Sans Serif, WenQuanYi Micro Hei, sans;
+}
+
 .archive-list ul li a span.year {
     margin-left: 30px;
     text-transform: uppercase;
@@ -51,4 +57,12 @@
     top: 47px;
     left: 50%;
     margin-left: -85px;
+}
+
+#div_id_honeypot {
+    display: none;
+}
+
+.asteriskField {
+    color: red;
 }

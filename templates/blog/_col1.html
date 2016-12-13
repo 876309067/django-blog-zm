@@ -1,3 +1,5 @@
+{% load comments %}
+{% get_comment_count for post as comment_count %}
 <div class="col-md-12">
     <div class="post-img">
         <a href="{{ post.get_absolute_url }}">
@@ -5,16 +7,14 @@
                                              {{ post.category.cover.cover_770_300.url }}{% endif %}"
                  alt="Review Image"/>
         </a>
-        <a href="#" class="post-tag">{{ post.category }}</a>
+        <a href="{% url 'blog:in_category' post.category.slug %}" class="post-tag">{{ post.category }}</a>
         <div class="post-info">
             <p>
                                             <span class="post-date">
                                             <a href="#">{{ post.pub_date | date:'Y-m-d' }}</a>
                                             </span>
                 <span class="post-comments">
-                    <a href="{{ post.get_absolute_url }}#comment-area" class="ds-thread-count"
-                       data-thread-key="{{ post.pk }}">
-                    </a>
+                    {{ comment_count }} 评论
                 </span>
                 <span class="post-social-links">
 														<a href="{{ post.get_absolute_url }}">{{ post.views }} 阅读</a>
