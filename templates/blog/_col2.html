@@ -20,7 +20,7 @@
                     <a href="{{ post.get_absolute_url }}">{{ post.pub_date | date:'Y-m-d' }}</a>
                 </span>
                 <span class="post-comments">
-                    {{ comment_count }} 评论
+                    <a href="{{ post.get_absolute_url }}#comment-area">{{ comment_count }} 评论</a>
                 </span>
                 <span class="post-social-links">
                     <a href="{{ post.get_absolute_url }}">{{ post.views }} 阅读</a>

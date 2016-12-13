@@ -109,20 +109,23 @@ class InTagView(SetHeadlineMixin, MessageMixin, ListView):
 #         announcement_list = Announcement.objects.all()
 #         kwargs.update({'announcement_list': announcement_list})
 #         return kwargs
-
-
-class ContactView(FormValidMessageMixin, FormView):
-    form_valid_message = 'Thank you for you message'
-    form_class = ContactForm
+class AboutView(TemplateView):
     template_name = 'blog/contact.html'
 
-    def form_valid(self, form):
-        form.send()
-        return super(ContactView, self).form_valid(form)
 
-    def get_success_url(self):
-        self.success_url = reverse('blog:contact')
-        return super().get_success_url()
+# class ContactView(FormValidMessageMixin, FormView):
+class ContactView(TemplateView):
+    # form_valid_message = 'Thank you for you message'
+    # form_class = ContactForm
+    template_name = 'blog/contact.html'
+    #
+    # def form_valid(self, form):
+    #     form.send()
+    #     return super(ContactView, self).form_valid(form)
+    #
+    # def get_success_url(self):
+    #     self.success_url = reverse('blog:contact')
+    #     return super().get_success_url()
 
 
 class SearchView(MessageMixin, HaystackSearchView):

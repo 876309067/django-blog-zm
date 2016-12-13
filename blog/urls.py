@@ -14,5 +14,6 @@ urlpatterns = [
         name="archive_month"),
     # url(r'^messages/$', views.MessageBoardView.as_view(), name='message_board'),
     # url(r'^messages/(?P<slug>.+)/$', views.AnnouncementDetailView.as_view(), name='announcement'),
-    # url(r'^contact/$', views.ContactView.as_view(), name='contact'),
+    url(r'^contact/$', views.ContactView.as_view(), name='contact'),
+    url(r'^about/$', views.AboutView.as_view(), name='about'),
 ]

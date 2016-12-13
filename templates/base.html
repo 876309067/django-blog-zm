@@ -110,8 +110,8 @@
                         <nav>
                             <ul class="main-nav navbar-right">
                                 <li><a href="{% url 'blog:index' %}">主页</a></li>
-                                <li><a href="#">关于</a></li>
-                                <li><a href="#">联系我</a></li>
+                                <li><a href="{% url 'blog:about' %}">关于</a></li>
+                                <li><a href="{% url 'blog:contact' %}">联系我</a></li>
                             </ul>
                         </nav>
                     </div><!-- /.main-menu -->
@@ -125,9 +125,9 @@
                     <div class="col-md-12">
                         <nav id="dropdown">
                             <ul>
-                                <li><a href="#">主页</a></li>
-                                <li><a href="#">关于</a></li>
-                                <li><a href="#">联系我</a></li>
+                                <li><a href="{% url 'blog:index' %}">主页</a></li>
+                                <li><a href="{% url 'blog:about' %}">关于</a></li>
+                                <li><a href="{% url 'blog:contact' %}">联系我</a></li>
                             </ul>
                         </nav>
                     </div>
@@ -178,7 +178,7 @@
 
 <!-- footer-area start -->
 <footer id="footer" class="footer-area text-center">
-    <p class="copyright-text">&copy; Copyright© 2015 Blogging. All right reserved.</p>
+    <p class="copyright-text">&copy; Copyright© 2016 zmrenwu.com. All right reserved.</p>
 </footer>
 <!-- footer-area end -->
 
