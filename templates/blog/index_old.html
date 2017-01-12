@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% load bootstrap_pagination %}
+
+{% block main %}
+    <div class="col-md-8 col-sm-12">
+        {% block post_list %}
+            <div class="row">
+                {% for post in post_list %}
+                    {% if forloop.counter <= 4 %}
+                        {% include 'blog/_col2.html' %}
+                    {% else %}
+                        {% include 'blog/_col1.html' %}
+                    {% endif %}
+                {% empty %}
+                    暂无文章
+                {% endfor %}
+            </div>
+        {% endblock post_list %}
+        {% block pagination %}
+            {% include 'blog/_pagination.html' %}
+        {% endblock pagination %}
+    </div>
+{% endblock main %}

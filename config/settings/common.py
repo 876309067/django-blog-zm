@@ -141,6 +141,7 @@ MARKDOWNX_MARKDOWN_EXTENSIONS = [
     'markdown.extensions.nl2br',
     'markdown.extensions.smarty',
     'markdown.extensions.codehilite',
+    'markdown.extensions.toc',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'

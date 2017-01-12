@@ -1,213 +1,171 @@
 {% load staticfiles %}
+{% load blog_tags %}
 <!DOCTYPE html>
-<html class="no-js" lang="zh-cn">
+<html lang="zh-cn">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    {% block title %}
-        <title>{{ headline|default:"追梦人物的博客 - 探索 Python、分享 Python" }}</title>
-    {% endblock title %}
-    <meta name="description" content="">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="baidu-site-verification" content="BB0a0qDxyr"/>
     <meta name="robots" content="follow, all"/>
     <meta name="description" content="探索 Python 世界，分享 django web开发、Python 数据分析、Python 网络爬虫等一切与 Python 相关的知识"/>
-    <!-- favicon
-    ============================================ -->
-    <link rel="shortcut icon" type="image/x-icon" href="{% static 'blog/img/favicon.png' %}">
-
-    <!-- Google Fonts
-    ============================================ -->
-    {#    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet' type='text/css'>#}
-
-    <!-- Bootstrap CSS
-    ============================================ -->
-    {#    <link rel="stylesheet" href="{% static 'blog/css/bootstrap.min.css' %}">#}
-    <link href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-    <!-- font-awesome CSS
-    ============================================ -->
-    {#    <link rel="stylesheet" href="{% static 'blog/css/font-awesome.min.css' %}">#}
+    {% block title %}
+        <title>{{ headline|default:"追梦人物的博客 - 探索 Python、分享 Python" }}</title>
+    {% endblock title %}
     <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <!-- owl.carousel CSS
-    ============================================ -->
-    {#    <link rel="stylesheet" href="{% static 'blog/css/owl.carousel.css' %}">#}
-    {#    <link rel="stylesheet" href="{% static 'blog/css/owl.theme.css' %}">#}
-    {#    <link rel="stylesheet" href="{% static 'blog/css/owl.transitions.css' %}">#}
-    <!-- meanmenu CSS
-    ============================================ -->
-    <link rel="stylesheet" href="{% static 'blog/css/meanmenu.css' %}">
-    <!-- normalize CSS
-    ============================================ -->
-    {#    <link rel="stylesheet" href="{% static 'blog/css/normalize.css' %}">#}
-    <link href="//cdn.bootcss.com/normalize/5.0.0/normalize.min.css" rel="stylesheet">
-    <!-- main CSS
-    ============================================ -->
-    <link rel="stylesheet" href="{% static 'blog/css/main.css' %}">
-    <!-- style CSS
-    ============================================ -->
-    <link rel="stylesheet" href="{% static 'blog/css/style.css' %}">
-    <link rel="stylesheet" href="{% static 'blog/css/custom.css' %}">
-    <!-- code highlight CSS
-        ============================================ -->
-    <link href="{% static 'blog/css/github.css' %}" rel="stylesheet">
-    <!-- responsive CSS
-    ============================================ -->
-    <link rel="stylesheet" href="{% static 'blog/css/responsive.css' %}">
-    <!-- modernizr JS
-    ============================================ -->
-    {% block link %}
-    {% endblock link %}
-    {% block style %}
-    {% endblock style %}
-    <script src="//cdn.bootcss.com/modernizr/2.8.3/modernizr.min.js"></script>
-    {#    <script src="{% static 'blog/js/vendor/modernizr-2.8.3.min.js' %}"></script>#}
+    <link rel="stylesheet" href="{% static 'blog/css/mobi.min.css' %}">
+    <link rel="stylesheet" href="{% static 'blog/css/theme.css' %}">
 </head>
-<body class="home-2">
-<!--[if lt IE 8]>
-<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
-    your browser</a> to improve your experience.</p>
-<![endif]-->
+<body>
+<section class="flex-center">
+    {% block aside %}
+        <aside id="sidebar" class="sidebar hide-on-mobile">
+            <div class="logo text-center top-gap"><a href="{% url 'blog:index' %}">ZM</a></div>
+            <nav class="navigation">
+                <ul>
+                    <li class="home"><a href="{% url 'blog:index' %}"><i class="item-icon fa fa-home"
+                                                                         aria-hidden="true"></i> 首页</a></li>
 
-<!-- header-area start -->
-<header id="header" class="header-area">
-    <div class="header-top">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6 col-sm-6 col-xs-6">
-                    <div class="header-top-left">
-                        <ul class="social-icons">
-                            <li><a href="https://github.com/zmrenwu"><i class="fa fa-github" aria-hidden="true"></i></a>
-                            </li>
-                            <li><a href="http://weibo.com/u/2494998151"><i class="fa fa-weibo"
-                                                                           aria-hidden="true"></i></a></li>
+                    <li class="column">
+                        {% get_categories as category_list %}
+                        <a href=""><i class="item-icon fa fa-heart" aria-hidden="true"></i> 推荐专题</a>
+                        <ul>
+                            {% for category in category_list %}
+                                <li>
+                                    <a href="{% url 'blog:in_category' category.slug %}" class="recommended">
+                                        <span class="category">{{ category }}</span>
+                                    </a>
+                                </li>
+                            {% endfor %}
                         </ul>
-                    </div>
-                </div>
-                <div class="col-md-6 col-sm-6 col-xs-6">
-                    <div class="header-top-right fix">
-                        <div class="header-search">
-                            <form action="#" method="post">
-                                <button type="button" class="search-toggler"><i class="fa fa-search"></i></button>
-                            </form>
+                    </li>
+
+                    <li class="column">
+                        {% get_categories as category_list %}
+                        <a href=""><i class="item-icon fa fa-columns" aria-hidden="true"></i> 分类</a>
+                        {% comment %}
+                    <ul>
+                        {% for category in category_list %}
+                            <li>
+                                <a href="{% url 'blog:in_category' category.slug %}">
+                                    <span class="category">{{ category }}</span>
+                                    <span class="number">({{ category.post_count }})</span>
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                    {% endcomment %}
+                    </li>
+                    <li class="archive">
+                        <a href=""><i class="item-icon fa fa-archive top-gap" aria-hidden="true"></i> 归档</a>
+                        <ul>
+                            <li>
+                                <a href="">2016年</a>
+                                <ul>
+                                    <li><a href="">12月</a></li>
+                                    <li><a href="">11月</a></li>
+                                    <li><a href="">10月</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="">2015年</a>
+                                <ul>
+                                    <li><a href="">12月</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="rss"><a href=""><i class="item-icon fa fa-rss" aria-hidden="true"></i> RSS</a></li>
+                    <li class="social">
+                        <div class="flex-left">
+                            <div class="unit"><a href=""><i class="item-icon fa fa-github" aria-hidden="true"></i>
+                                GitHub</a></div>
+
+                            <div class="unit"><a href=""><i class="item-icon fa fa-globe" aria-hidden="true"></i> 知乎</a>
+                            </div>
                         </div>
+                        {% comment %}
+                    <div class="unit"><a href=""><i class="item-icon fa fa-weibo" aria-hidden="true"></i> 微博</a>
                     </div>
-                </div>
-            </div>
+                    {% endcomment %}
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+    {% endblock aside %}
+    <header class="flex-middle" id="id_header">
+        <div class="unit show-btn-wrapper">
+            <i class="fa fa-bars show-on-mobile" aria-hidden="true" id="id_show_btn"></i>
+            <a href="{% url 'blog:index' %}"><i class="fa fa-home show-on-mobile" aria-hidden="true" id=""
+                                                style="margin-left: 1em"></i></a>
         </div>
-    </div><!-- /.header-top -->
-    <div class="header-bottom">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-3">
-                    <div class="logo">
-                        <a href="{% url 'blog:index' %}">
-                            <img src="{% static 'blog/img/logo.png' %}" alt="Logo"/>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-md-9">
-                    <div class="main-menu">
-                        <nav>
-                            <ul class="main-nav navbar-right">
-                                <li><a href="{% url 'blog:index' %}">主页</a></li>
-                                <li><a href="{% url 'blog:about' %}">关于</a></li>
-                                <li><a href="{% url 'blog:contact' %}">联系我</a></li>
-                            </ul>
-                        </nav>
-                    </div><!-- /.main-menu -->
-                </div>
-            </div>
+        <div class="unit search-form">
+            <form action="{% url 'blog:search' %}" class="search-form text-right" method="get">
+                {% csrf_token %}
+                <input type="text" name="q" placeholder="输入关键词搜索...">
+                <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+            </form>
         </div>
-        <!-- mobile-menu-area start -->
-        <div class="mobile-menu-area">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <nav id="dropdown">
-                            <ul>
-                                <li><a href="{% url 'blog:index' %}">主页</a></li>
-                                <li><a href="{% url 'blog:about' %}">关于</a></li>
-                                <li><a href="{% url 'blog:contact' %}">联系我</a></li>
-                            </ul>
-                        </nav>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- mobile-menu-area end -->
-    </div><!-- /.header-bottom -->
-</header>
-<!-- header-area end -->
+    </header>
+    {% block main %}
 
-<!-- search-area start -->
-<div class="search-area">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="search-form">
-                    <span class="search-close"></span>
-                    <form action="{% url 'blog:search' %}" method="get">
-                        {% csrf_token %}
-                        <input type="text" name="q" placeholder="输入关键词搜索..."/>
-                        <button type="submit" class="search-btn"><i class="fa fa-search"></i></button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- search-area end -->
+    {% endblock %}
+</section>
 
-<!-- slider-area start -->
+<script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+<script>
+    var leftWidht = $('#id_container').offset().left;
+    var sidebarWidth = $('#sidebar').width();
+    $('#sidebar').css({
+        'position': 'fixed',
+        'left': leftWidht - sidebarWidth * 1.5,
+        'top': 0,
+        'bottom': 0
+    });
 
-<!-- slider-area end -->
+    var flag = 1;
+    $('#id_show_btn').on('click', function () {
+        if (flag) {
+            showSidebar();
+            flag = 0
+        } else {
+            hideSidebar();
+            flag = 1
+        }
+    });
 
-<!-- main-content-area start -->
-<div id="main-content" class="main-content-area">
-    <div class="container">
-        <div class="row">
-            {% block main %}
-            {% endblock main %}
-            {% block aside %}
-                {% include 'blog/sidebar.html' %}
-            {% endblock aside %}
-        </div>
-    </div>
-</div>
-<!-- main-content-area end -->
+    function showSidebar() {
+        $('#sidebar').css({
+            'position': 'fixed',
+            'left': '-265px',
+            'top': '0',
+            'bottom': '0'
+        }).show().animate({left: '0'}, 300);
 
-<!-- footer-area start -->
-<footer id="footer" class="footer-area text-center">
-    <p class="copyright-text">&copy; Copyright© 2016 zmrenwu.com. All right reserved.</p>
-</footer>
-<!-- footer-area end -->
+        $('#id_container').css({
+            'position': 'fixed',
+            'left': '0',
+            'top': '0'
+        }).animate({left: '265'}, 300);
 
-<!-- jquery
-============================================ -->
-{#<script src="{% static 'blog/js/vendor/jquery-1.11.3.min.js' %}"></script>#}
-<script src="//cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
-<!-- bootstrap JS
-============================================ -->
-{#<script src="{% static 'blog/js/bootstrap.min.js' %}"></script>#}
-<script src="//cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<!-- meanmenu JS
-============================================ -->
-<script src="{% static 'blog/js/jquery.meanmenu.js' %}"></script>
-<!-- owl.carousel JS
-============================================ -->
-<script src="{% static 'blog/js/owl.carousel.min.js' %}"></script>
-<!-- scrollUp JS
-============================================ -->
-{#<script src="{% static 'blog/js/jquery.scrollUp.min.js' %}"></script>#}
-<script src="//cdn.bootcss.com/scrollup/2.4.1/jquery.scrollUp.min.js"></script>
-<!-- plugins JS
-============================================ -->
-<script src="{% static 'blog/js/plugins.js' %}"></script>
-<script src="{% static 'blog/js/contents.js' %}"></script>
-<!-- main JS
-============================================ -->
-<script src="{% static 'blog/js/main.js' %}"></script>
-{% block script %}
-{% endblock script %}
+        $('#id_header').css({
+            'left': '0',
+            'top': '0'
+        }).animate({left: '265'}, 300);
+    }
+
+    function hideSidebar() {
+        $('#sidebar').animate({left: '-265px'}, 300);
+
+        $('#id_container').animate({left: '0'}, 300, function () {
+            $('#id_container').css({
+                'position': 'static'
+            });
+        });
+
+        $('#id_header').animate({left: '0'}, 300, function () {
+            $('#id_container')
+        });
+    }
+</script>
 </body>
 </html>

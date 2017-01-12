@@ -1,0 +1,250 @@
+/* reset font-size to 16px*/
+body {
+    font-size: 1.6rem;
+}
+
+a {
+    color: #555;
+}
+
+a:hover {
+    color: #000;
+    text-decoration: none;
+}
+
+/* sidebar */
+.sidebar {
+    background-color: #fff;
+    border-right: 1px solid #eee;
+    width: 265px;
+    z-index: 2;
+}
+
+/* logo */
+.sidebar .logo {
+    font-size: 5em;
+}
+
+/* navigation */
+.sidebar .navigation ul {
+    font-size: 1.125em;
+    list-style: none;
+    margin-left: 0;
+    padding: 0 1.5em;
+}
+
+.sidebar .navigation > ul > li {
+    margin-top: 1.2em;
+}
+
+.sidebar a {
+    color: #555;
+}
+
+.sidebar a:hover {
+    color: #000;
+    text-decoration: none;
+}
+
+.sidebar .navigation > ul > li a {
+    display: block;
+}
+
+.sidebar .navigation > ul ul {
+    font-size: 1.6rem;
+    margin-top: 0.5em;
+}
+
+.sidebar .navigation > ul ul li {
+    margin-bottom: 3px;
+    margin-left: 1em;
+}
+
+.sidebar .navigation .archive > ul {
+    display: none;
+}
+
+.item-icon {
+    margin-right: 5px;
+}
+
+.column .recommended {
+    color: red;
+}
+
+.social {
+    font-size: 1.6rem;
+}
+
+/* main header*/
+#id_header {
+    padding: 0 14px 14px;
+    overflow: hidden;
+    width: 100%;
+    max-width: 740px;
+    min-width: 320px;
+    position: fixed;
+    top: 0;
+    height: 3em;
+    background-color: #fff;
+    z-index: 1;
+}
+
+@media (min-width: 1041px) {
+    #id_header {
+        max-width: 768px;
+        outline: 0;
+        padding: 0 28px;
+    }
+}
+
+.search-form {
+    position: relative;
+}
+
+.search-form button {
+    border-radius: 2.8125em;
+    background-color: #fff;
+    border: none;
+    position: absolute;
+    right: 0.2em;
+    bottom: 0;
+    margin-bottom: 1px;
+}
+
+.search-form input {
+    padding-left: 0.8em;
+    padding-right: 0.8em;
+    border-radius: 2.8125em;
+    border: 1px solid #333;
+    width: 11em;
+}
+
+/* mian post list*/
+.container {
+    margin-top: 2em;
+}
+
+.post {
+    border-bottom: 1px solid rgb(217, 217, 217);
+    padding-bottom: 3em;
+}
+
+.post-item {
+    border-bottom: 1px dashed rgb(217, 217, 217);
+    padding-bottom: 1em;
+}
+
+.post .meta {
+    list-style: none;
+    display: inline-block;
+    padding-left: 0;
+    margin-top: 8px;
+}
+
+.post .meta li {
+    display: inline-block;
+    font-size: 0.875em;
+}
+
+/* post table of content */
+.sidebar .toc {
+    padding: 0 1.5em;
+}
+
+.toc .lead {
+    font-size: 1.7em;
+}
+
+.toc ul li {
+    margin-bottom: 3px;
+}
+
+.home-btn {
+    margin-left: 0.5em;
+}
+
+.comment_area {
+    margin-top: 3em;
+}
+
+/* comment list */
+.root_comment:not(:last-child) {
+    border-bottom: 1px dashed rgb(217, 217, 217);
+    padding-bottom: 0.5em;
+}
+
+.root_comment {
+    margin-top: 1.5em;
+}
+
+.avatar {
+    float: left;
+    border-radius: 0.1em;
+    width: 2em;
+}
+
+.comment_body {
+    margin-left: 2.5em;
+}
+
+.comment_body .author,
+footer {
+    font-size: 0.85em;
+}
+
+.comment_body .comment_txt {
+    margin-top: 0.3em;
+}
+
+.comment_body .reply_btn {
+    margin-left: 1em;
+}
+
+.nested_comment {
+    margin-left: 1.5em;
+    margin-top: 1em;
+}
+
+.copyright,
+.tags {
+    margin-top: 3em;
+}
+
+.share {
+    font-size: 1.2em;
+    margin-top: 1em;
+}
+
+.tags {
+    list-style: none;
+}
+
+.tags li {
+    font-size: 1em;
+}
+
+.tags li:not(:last-child) {
+    margin-right: 1em;
+}
+
+.pre-next {
+    font-size: 0.9em;
+    margin-top: 1em;
+}
+
+/* 归档 */
+.archive-year {
+    font-size: 1.1em;
+    margin-top: 2em;
+}
+
+.archive-month {
+    font-size: 0.85em;
+    margin-top: 0.8em;
+}
+
+footer {
+    margin-top: 2em;
+    margin-bottom: 1.5em;
+}

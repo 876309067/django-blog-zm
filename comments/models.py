@@ -1,8 +1,5 @@
-import re
-
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
-from django.utils.html import mark_safe, escape
 
 from django_comments.abstracts import CommentAbstractModel
 from django_comments.managers import CommentManager

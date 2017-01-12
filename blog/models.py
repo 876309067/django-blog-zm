@@ -1,3 +1,5 @@
+import markdown
+
 from datetime import datetime
 
 from django.db import models
@@ -77,6 +79,12 @@ class Post(StatusModel, TimeStampedModel, TimeFramedModel):
     @property
     def body_html(self):
         return mark_safe(markdownify(self.body.content))
+
+    @property
+    def toc(self):
+        md = markdown.Markdown(extensions=settings.MARKDOWNX_MARKDOWN_EXTENSIONS)
+        md.convert(self.body.content)
+        return mark_safe(md.toc)
 
     @property
     def excerpt_html(self):

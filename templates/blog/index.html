@@ -1,24 +1,20 @@
 {% extends 'base.html' %}
-
-{% load bootstrap_pagination %}
-
 {% block main %}
-    <div class="col-md-8 col-sm-12">
-        {% block post_list %}
-            <div class="row">
-                {% for post in post_list %}
-                    {% if forloop.counter <= 4 %}
-                        {% include 'blog/_col2.html' %}
-                    {% else %}
-                        {% include 'blog/_col1.html' %}
-                    {% endif %}
-                {% empty %}
-                    暂无文章
-                {% endfor %}
-            </div>
-        {% endblock post_list %}
-        {% block pagination %}
-            {% include 'blog/_pagination.html' %}
-        {% endblock pagination %}
-    </div>
+    <main class="container" id="id_container">
+        {% for post in page_obj %}
+            <article class="post post-item">
+                <h5 class="title"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h5>
+                <ul class="meta text-muted">
+                    {% load comments %}
+                    {% get_comment_count for post as comment_count %}
+                    <li><a href="{{ post.get_absolute_url }}" class="">阅读 {{ post.views }}</a></li>
+                    ·
+                    <li><a href="{{ post.get_absolute_url }}#id_comment_area" class="">评论 {{ comment_count }}</a></li>
+                    ·
+                    <li><a>{{ post.pub_date|date }}</a></li>
+                </ul>
+            </article>
+        {% endfor %}
+        <footer class="flex-center">&copy; 2016 All Rights Reserved - 网站地图 - 联系我</footer>
+    </main>
 {% endblock main %}
